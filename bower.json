@@ -1,0 +1,16 @@
+{
+  "name": "lance",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "~3.0.0",
+    "requirejs": "~2.1.4",
+    "modernizr": "~2.6.2",
+    "jquery": "~1.9.1",
+    "angular": "~1.2.23",
+    "angularjs-mongolab-promise": "~1.0.0-RC1",
+    "angular-route": "~1.2.23",
+    "angular-select2": "~1.1.2",
+    "angular-ui-select2": "~0.0.5"
+  },
+  "devDependencies": {}
+}

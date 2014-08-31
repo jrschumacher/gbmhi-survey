@@ -1,0 +1,341 @@
+<h1>Social Capital and Networking Survey</h1>
+
+<p>
+    In preparation for the second gathering of the Greater Boston Muslim Health Initiative (www.gbmhi.org) on October 18, 2014, we would like to document the resources and relationships of local organizations that currently promote well-being among the region’s diverse Muslim population.  We are asking key individuals to fill out a short survey.  The preliminary results of this mapping exercise will be presented and discussed at the conference, in order to strengthen and expand a collaborative network. We would like for your organizations to be included on the map and in the discussion.  Please take 10-15 minutes to fill out this online survey.
+</p>
+
+<p>
+    The community map and organizational network will be revised during and after the GBMHI conference.  We hope to publish a map on our website, with some brief general comments about the types of relationships that exist.  Our hope is that this information will be useful to all the organizations listed.  The information will also be analyzed by a group of students in Dr. Lance Laird’s medical anthropology course, “Islamic Medicines and Healing” at Boston University during the fall of 2014.  Students will then conduct interviews with some individuals from model organizations.  You are under no obligation to participate in any part of this survey and interview process.
+</p>
+
+<form role="form">
+
+    <div ng-show="curPage == 0">
+
+        <legend>
+            Organization
+        </legend>
+
+        <div class="form-group">
+            <label for="organization.name">Organization Name</label>
+            <input ng-model="organization.name" type="text" class="form-control" id="organization.name" placeholder="Organization Name">
+        </div>
+
+        <legend>
+            Address
+        </legend>
+
+        <div class="form-group">
+            <label for="organization.street1">Organization Street</label>
+            <input ng-model="organization.street1" type="text" class="form-control" id="organization.street1" placeholder="Organization Street">
+        </div>
+
+        <div class="form-group">
+            <input ng-model="organization.street2" type="text" class="form-control" id="organization.street2" placeholder="(optional)">
+        </div>
+
+        <div class="form-group">
+            <label for="organization.city">City</label>
+            <input ng-model="organization.city" type="text" class="form-control" id="organization.city" placeholder="City">
+        </div>
+
+        <div class="form-group">
+            <label for="organization.state">State</label>
+            <input ng-model="organization.state" type="text" class="form-control" id="organization.state" placeholder="State">
+        </div>
+
+        <div class="form-group">
+            <label for="organization.postal">Postal</label>
+            <input ng-model="organization.postal" type="text" class="form-control" id="organization.postal" placeholder="Postal">
+        </div>
+
+        <div class="form-group">
+            <label for="organization.country">Country</label>
+            <input ng-model="organization.country" type="text" class="form-control" id="organization.country" placeholder="Country">
+        </div>
+
+        <legend>
+            Contact
+        </legend>
+
+        <div class="form-group">
+            <label for="organization.phone">Phone</label>
+            <input ng-model="organization.phone" type="text" class="form-control" id="organization.phone" placeholder="Phone">
+        </div>
+
+        <div class="form-group">
+            <label for="organization.email">Email</label>
+            <input ng-model="organization.email" type="email" class="form-control" id="organization.email" placeholder="Email">
+        </div>
+
+        <div class="form-group">
+            <label for="organization.website">Website</label>
+            <input ng-model="organization.website" type="url" class="form-control" id="organization.website" placeholder="Website">
+        </div>
+
+        <legend>
+            Categorization
+        </legend>
+
+        <div class="form-group">
+            <label for="organization.type">Type of Organization</label>
+            <select ng-model="organization.type" ui-select2 class="form-control">
+                <option value=""></option>
+                <option value="healthcare">healthcare</option>
+                <option value="publicHealth">publicHealth</option>
+                <option value="educational">educational</option>
+                <option value="religious">religious</option>
+                <option value="socialService">social service</option>
+                <option value="other">other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="organization.services">Services</label>
+            <input ng-model="organization.services" ui-select2="{multiple:true, simple_tags:true, tags:serviceTags}" type="hidden" class="form-control" id="organization.services">
+        </div>
+
+        <legend>
+            Connected Organizations
+        </legend>
+
+        <div class="form-group">
+            <label>Name</label>
+            <div ng-repeat="connection in organization.connections" class="form-group">
+                <div class="row">
+                    <div class="col-lg-11">
+                        <input ng-model="connection.name" class="form-control">
+                    </div>
+                    <div class="col-lg-1">
+                        <button ng-show="$last && $index <= 6" ng-click="addConnection()" class="btn btn-sm btn-default">+</button>
+                        <button ng-show="!$first && $last" ng-click="removeConnection()" class="btn btn-sm btn-default">-</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-show="curPage > 0 && !lastPage()">
+        <h2>
+            For Organization: {{currentOrgConnection.name}}
+        </h2>
+
+        <legend>
+            Information
+        </legend>
+
+        <div class="form-group">
+            <label>
+                Address
+            </label>
+            <textarea ng-model="currentOrgConnection.address" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>
+                How often does your organization interact with this organization?
+            </label>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            <label for="interact-none">
+                                No interaction
+                            </label>
+                        </th>
+                        <th class="text-center">
+                            <label for="interact-annually">
+                                At least once a year
+                            </label>
+                        </th>
+                        <th class="text-center">
+                            <label for="interact-quarterly">
+                                Quarterly, 3-4 times a year
+                            </label>
+                        </th>
+                        <th class="text-center">
+                            <label for="interact-monthly">
+                                Monthly or more frequently
+                            </label>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.interactFreq" type="radio" value="none" id="interact-none">
+                        </td>
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.interactFreq" type="radio" value="annually" id="interact-annually">
+                        </td>
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.interactFreq" type="radio" value="quarterly" id="interact-quarterly">
+                        </td>
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.interactFreq" type="radio" value="monthly" id="interact-monthly">
+                        </td class="text-center">
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <label>
+                Is your relationship...
+            </label>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            <label for="relationship-poor">
+                                Poor
+                            </label>
+                        </th>
+                        <th class="text-center">
+                            <label for="relationship-fair">
+                                Fair
+                            </label>
+                        </th>
+                        <th class="text-center">
+                            <label for="relationship-good">
+                                Good
+                            </label>
+                        </th>
+                        <th class="text-center">
+                            <label for="relationship-very-good">
+                                Very Good
+                            </label>
+                        </th>
+                        <th class="text-center">
+                            <label for="relationship-excellent">
+                                Excellent
+                            </label>
+                        </th>
+                        <th class="text-center">
+                            <label for="relationship-potential">
+                                Potential
+                            </label>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.relationship" type="radio" value="poor" id="relationship-poor">
+                        </td>
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.relationship" type="radio" value="fair" id="relationship-fair">
+                        </td>
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.relationship" type="radio" value="good" id="relationship-good">
+                        </td>
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.relationship" type="radio" value="very-good" id="relationship-very-good">
+                        </td class="text-center">
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.relationship" type="radio" value="excellent" id="relationship-excellent">
+                        </td class="text-center">
+                        <td class="text-center">
+                            <input ng-model="currentOrgConnection.relationship" type="radio" value="potential" id="relationship-potential">
+                        </td class="text-center">
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <legend>
+            Does your organization collaborate with this organization in the following ways?
+        </legend>
+
+        <div class="form-group">
+            <div>
+                <label>
+                    <input ng-model="currentOrgConnection.collaborate['planning']" type="checkbox"> Joint planning
+                </label>
+                <label>
+                    <input ng-model="currentOrgConnection.collaborate['information']" type="checkbox"> Sharing information
+                </label>
+                <label>
+                    <input ng-model="currentOrgConnection.collaborate['referrals']" type="checkbox"> Referrals sent or received
+                </label>
+                <label>
+                    <input ng-model="currentOrgConnection.collaborate['training']" type="checkbox"> Training
+                </label>
+            </div>
+        </div>
+
+        <legend>
+            Please describe any of the above in response to the following questions
+        </legend>
+
+        <div class="form-group">
+            <label>
+                What resources do you currently provide FOR this organization?
+            </label>
+            <textarea ng-model="currentOrgConnection.resourcesProvide" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>
+                What resources do you currently receive FROM this organization?
+            </label>
+            <textarea ng-model="currentOrgConnection.resourcesRecieve" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>
+                What resources would you LIKE to provide FOR this organization?
+            </label>
+            <textarea ng-model="currentOrgConnection.resourcesLikeProvide" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>
+                What resources would you LIKE to receive FROM this organization?
+            </label>
+            <textarea ng-model="currentOrgConnection.resourcesLikeRecieve" class="form-control"></textarea>
+        </div>
+
+    </div>
+
+    <div ng-show="lastPage()">
+
+        <legend>
+            Agreement and Interview
+        </legend>
+
+        <div class="form-group">
+            <p>
+                Boston University students will conduct interviews about some of the organizations participating in the survey and conference.  Would you be interested in being contacted for a follow-up interview?
+            </p>
+
+            <label>
+                <input ng-model="survey.interview" type="checkbox"> Please contact me for an interview.
+            </label>
+        </div>
+
+        <div class="form-group">
+            <p>
+                I understand that my information will be used for research purposes and shared with the public. Your information will not be sold or used beyond this purpose.
+            </p>
+
+            <label>
+                <input ng-model="agree" type="checkbox"> Yes, I agree.
+            </label>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="pull-left">
+            Page {{curPage + 1}} / {{totalPages + organization.connections.length + 1}}
+        </div>
+        <div class="pull-right">
+            <button ng-show="curPage > 0" ng-click="prevPage()" class="btn btn-default">Previous</button>
+            <button ng-show="!lastPage()" ng-click="nextPage()" class="btn btn-default">Next</button>
+            <button ng-show="lastPage()" ng-disabled="!agree" ng-click="completeSurvey()" class="btn btn-success">Save &amp; Submit</button>
+        </div>
+    </div>
+
+</form>
